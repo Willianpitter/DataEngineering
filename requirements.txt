@@ -1,0 +1,6 @@
+Flask==3.0.3
+psycopg2==2.9.9
+geopandas==0.10.2
+websockets==10.0
+pandas==2.2.3
+SQLAlchemy==2.0.35
