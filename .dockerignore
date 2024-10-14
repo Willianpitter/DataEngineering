@@ -1,0 +1,9 @@
+# Ignore system and temporary files
+*.pyc
+*.pyo
+*.pyd
+*.swp
+.DS_Store
+.vscode
+.idea
+__pycache__
