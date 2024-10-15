@@ -1,6 +1,4 @@
-# DataEngineering
-
-# Table of Contents
+# Data Engineering Challeng
 
 
 # Trip Ingestion Pipeline
@@ -25,13 +23,44 @@ Requirements
 
 # Step 1: Setup Environment
 
-git clone https://github.com/Willianpitter/DataEngineering.git
+    git clone https://github.com/Willianpitter/DataEngineering.git
 
 # Step 2. Install Dependencies
 
-python -m venv venv
-source venv/bin/activate   # For Windows: venv\Scripts\activate
+    python -m venv venv
+    source venv/bin/activate  # For Windows: venv\Scripts\activate
+    pip install -r requirements.txt
 
+# Step 3: Run the application
+To start the data base container
+
+    docker-compose up
+
+To run the app:
+
+    python app/app.py
+# Step 3: Using the API
+## 1. Ingest a CSV File
+Use Postman or cURL to upload a CSV file. The endpoint is /upload_trips (POST request):
+
+Example cURL request:
+
+    curl -X POST http://localhost:5000/upload_trips -F file=@/path/to/your/file.csv
+
+## 2. Check the Status of Ingestion
+To check the ingestion status, use the /status/<job_id> endpoint with a GET request:
+
+    curl http://localhost:5000/status/<job_id>
+
+## 3. Get Weekly Average by Region or Bounding Box
+
+For region-based weekly average:
+    
+    curl "http://localhost:5000/weekly_average?region=<your-region>"
+
+For bounding box coordinates (lat_min, lat_max, long_min, long_max):
+
+    curl "http://localhost:5000/weekly_average?lat_min=<min-lat>&lat_max=<max-lat>& long_min=<min-long>&long_max=<max-long>"
 
 
 # GCP Trip Data Ingestion and Processing API
