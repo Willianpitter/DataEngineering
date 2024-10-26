@@ -57,7 +57,7 @@ def ingest_trips(file_path,job_id):
 
    # Connect to the PostgreSQL database
     try:
-        engine = create_engine('postgresql://user:password@127.0.0.1:5432/trip_db', pool_pre_ping=True, client_encoding="UTF-8")
+        engine = create_engine('postgresql://user:password@db:5432/trip_db', pool_pre_ping=True, client_encoding="UTF-8")
         metadata = MetaData()
         create_table(engine, metadata, "trips")
     except Exception as e:

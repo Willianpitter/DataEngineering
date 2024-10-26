@@ -25,13 +25,7 @@ Requirements
 
     git clone https://github.com/Willianpitter/DataEngineering.git
 
-# Step 2. Install Dependencies
-
-    python -m venv venv
-    source venv/bin/activate  # For Windows: venv\Scripts\activate
-    pip install -r requirements.txt
-
-# Step 3: Run the application
+# Step 2: Run the application
 To start the data base container
 
     docker-compose up
@@ -45,7 +39,7 @@ Use Postman or cURL to upload a CSV file. The endpoint is /upload_trips (POST re
 
 Example cURL request:
 
-    curl -X POST http://localhost:5000/upload_trips -F file=@/path/to/your/file.csv
+    curl -X POST http://localhost:5000/upload_trips -F file=@data/trips.csv
 
 ## 2. Check the Status of Ingestion
 To check the ingestion status, use the /status/<job_id> endpoint with a GET request:

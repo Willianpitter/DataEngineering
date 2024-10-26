@@ -62,7 +62,7 @@ def weekly_average():
     region = request.args.get('region')
     lat_min, lat_max = request.args.get('lat_min'), request.args.get('lat_max')
     long_min, long_max = request.args.get('long_min'), request.args.get('long_max')
-
+    print("Chegando para pear a região:")
     if region:
         weekly_avg = weekly_average_region(region)
     elif lat_min and lat_max and long_min and long_max:
@@ -70,7 +70,7 @@ def weekly_average():
     else:
         return jsonify({'error': 'Please provide region or bounding box coordinates'}), 400
 
-    return jsonify({'weekly_average': weekly_avg.to_json()})
+    return jsonify({'weekly_average': weekly_avg})
 
 # Helper function to manage ingestion with real-time status updates
 def ingest_trips_with_status(file_path, job_id):

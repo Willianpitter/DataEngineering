@@ -1,7 +1,7 @@
 from sqlalchemy import inspect,create_engine, Table, Column, Integer,Float, String, MetaData, DateTime
 import pandas as pd
 
-engine = create_engine('postgresql://user:password@127.0.0.1:5432/trip_db', pool_pre_ping=True, client_encoding="UTF-8") 
+engine = create_engine('postgresql://user:password@db:5432/trip_db', pool_pre_ping=True, client_encoding="UTF-8") 
 
 metadata = MetaData() 
 
@@ -17,7 +17,8 @@ def weekly_average_region(region):
 
     '''
     tabledata = pd.read_sql_query(sql_query, engine)
-    return tabledata
+    weekly_avg = float(tabledata['weekly_average_trips'].iloc[0])
+    return weekly_avg
 
 def weekly_average_lat_long(lat_min, long_min, lat_max, long_max):
     sql_query = f'''
@@ -33,23 +34,5 @@ def weekly_average_lat_long(lat_min, long_min, lat_max, long_max):
 
     '''
     tabledata = pd.read_sql_query(sql_query, engine)
-    return tabledata
-#example
-sql_query = '''
-
-select datasource, max(lastests) as latest
-from (
-    SELECT region, datasource, MAX(datetime) as lastests
-    FROM trips
-    WHERE region IN (
-        SELECT region
-        FROM trips
-        GROUP BY region
-        ORDER BY COUNT(*) DESC
-        LIMIT 2
-    )
-    GROUP BY region, datasource
-)
-GROUP BY datasource order by latest desc limit 1;
-'''
-# Load data into DataFrame
+    weekly_avg = float(tabledata['weekly_average_trips'].iloc[0])
+    return weekly_avg
