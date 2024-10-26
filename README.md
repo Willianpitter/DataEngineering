@@ -28,7 +28,7 @@ Requirements
 # Step 2: Run the application
 To start the data base container
 
-    docker-compose up
+    docker-compose up --build
 
 To run the app:
 
