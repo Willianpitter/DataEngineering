@@ -30,15 +30,16 @@ To start the data base container
 
     docker-compose up --build
 
-To run the app:
-
-    python app/app.py
 # Step 3: Using the API
 ## 1. Ingest a CSV File
 Use Postman or cURL to upload a CSV file. The endpoint is /upload_trips (POST request):
 
-Example cURL request:
+Example cURL request (make sure that you are in relative path to data/trips.csv):
 
+    curl -X POST http://localhost:5000/upload_trips -F file=@path/to/your+file/file.csv
+
+Example that works in this projet:
+    
     curl -X POST http://localhost:5000/upload_trips -F file=@data/trips.csv
 
 ## 2. Check the Status of Ingestion
@@ -46,16 +47,27 @@ To check the ingestion status, use the /status/<job_id> endpoint with a GET requ
 
     curl http://localhost:5000/status/<job_id>
 
+Example:
+
+    curl http://localhost:5000/status/123
+
 ## 3. Get Weekly Average by Region or Bounding Box
 
 For region-based weekly average:
     
     curl "http://localhost:5000/weekly_average?region=<your-region>"
 
+Example:
+
+    curl "http://localhost:5000/weekly_average?region=Prague"
+
 For bounding box coordinates (lat_min, lat_max, long_min, long_max):
 
-    curl "http://localhost:5000/weekly_average?lat_min=<min-lat>&lat_max=<max-lat>& long_min=<min-long>&long_max=<max-long>"
+    curl "http://localhost:5000/weekly_average?lat_min=<min-lat>&lat_max=<max-lat>&long_min=<min-long>&long_max=<max-long>"
 
+Example:
+
+    curl "http://localhost:5000/weekly_average?lat_min=4&lat_max=40&long_min=4&long_max=52"
 
 # GCP Trip Data Ingestion and Processing API
 
